@@ -10,6 +10,7 @@ import ProfileCard from "@/components/proj/profilecard";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useAdmin } from "@/context/admincontext";
 
 const warinfo = [
   {
@@ -31,19 +32,23 @@ const warinfo = [
 ]
 
 export default function Home() {
-
+  const {admin, loading} = useAdmin();
+  console.log(admin)
   const [data, setData] = useState([]);
+  const [lloading, setLloading] = useState(false);
   const[page,setPage] = useState(1)
-  const [hasNext,setHasNext] = useState(true);
+  const [hasNext,setHasNext] = useState(false);
   const limit = 10;
 
 
   const fetchdata = (page) => {
+    setLloading(true)
     axios.get(`${process.env.NEXT_PUBLIC_API_URL}/getlim?page=${page}&limit=${limit}`).then(({data}) => {
       setData(data.data);
       const {pagination} = data;
       setHasNext(pagination.hasNext);
       setPage(pagination.page)
+      setLloading(false)
     }).catch((err) => console.log(err))
   }
 
@@ -57,7 +62,6 @@ export default function Home() {
     }
   }
 
-  console.log(data);
 
   return (
     <div>
@@ -115,7 +119,7 @@ export default function Home() {
               ))
             }
           </div>
-          {hasNext && <button onClick={nextHandler}>Load more</button>}
+          { lloading ? <p>Loading...</p> : hasNext && <button onClick={nextHandler}>Load more</button>}
         </div>
         <div className="bg-white py-10 px-4">
           <h2 className="text-3xl font-bold text-center mb-4 text-[#53682d]">Words That Inspire</h2>

@@ -42,7 +42,7 @@ export const admin = async (req, res) => {
                     httpOnly: true,
                     sameSite: "lax"
                 })
-                return res.status(200).json({name : user.name,role : user.role});
+                return res.status(200).json({user,isadmin : true});
             } else {
                 return res.json("incorrect password")
             }
@@ -56,7 +56,7 @@ export const admin = async (req, res) => {
 
 export const getAllTri = async (req, res) => {
     try {
-        const data = await Tribute.find({approved : false});
+        const data = await Tribute.find();
         return res.status(200).json(data);
     } catch (error) {
         return res.status(401).json({ error: error.message })
@@ -66,8 +66,23 @@ export const getAllTri = async (req, res) => {
 export const isAdmin = async(req,res) => {
     const user = req.user;
     if(user.role === "admin"){
-        return res.status(200).json({user,islogin : false})
+        return res.status(200).json({user,islogin : true})
     }else{
         return res.status(401).json({error : "You are not an admin"})
     }
+}
+
+export const VerifyTri = async(req,res) => {
+   const {id} = req.params;
+   try {
+    const data = await Tribute.findByIdAndUpdate(id,{
+        approved : true
+    },{new : true});
+    if(data){
+        return res.json("verified")
+    }
+    return res.json("item not found")
+   } catch (error) {
+    return res.json("something went wrong")
+   }
 }

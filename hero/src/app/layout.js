@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/proj/nav";
 import { Toaster } from "react-hot-toast";
+import { AdminProvider } from "@/context/admincontext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,11 +25,13 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="relative min-h-screen w-full overflow-y-scroll overflow-x-hidden no-scrollbar">
-           <Nav />
-          {children}
-          <Toaster position="top-center" reverseOrder={false} />
-        </div>
+        <AdminProvider>
+          <div className="relative min-h-screen w-full overflow-y-scroll overflow-x-hidden no-scrollbar">
+            <Nav />
+            {children}
+            <Toaster position="top-center" reverseOrder={false} />
+          </div>
+        </AdminProvider>
       </body>
     </html>
   );

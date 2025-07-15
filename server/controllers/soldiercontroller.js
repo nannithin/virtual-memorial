@@ -91,3 +91,12 @@ export const getLim = async (req, res) => {
         return res.status(401).json("server error")
     }
 }
+
+export const getAllPub = async (req, res) => {
+    try {
+        const data = await Tribute.find({approved : true});
+        return res.status(200).json(data);
+    } catch (error) {
+        return res.status(401).json({ error: error.message })
+    }
+}

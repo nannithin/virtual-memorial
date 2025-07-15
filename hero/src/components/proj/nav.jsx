@@ -11,9 +11,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import { useAdmin } from "@/context/admincontext";
+import Link from "next/link";
 
 const Nav = () => {
   const [open, setOpen] = useState(false);
+  const {admin,loading} = useAdmin();
+  console.log(admin)
   const pathname = usePathname();
   const isProfilePage = pathname.startsWith("/profile/");
   const isCreatePage = pathname.startsWith("/create");
@@ -39,7 +43,6 @@ const Nav = () => {
             About
           </li>
           <li className="max-md:hover:bg-[#9dae11] p-2 rounded-md duration-300 w-full block">
-            {/* Dropdown Wrapper */}
             <DropdownMenu>
               <DropdownMenuTrigger className="outline-none focus:outline-none" asChild>
                 <button onClick={() => console.log("hello")} className="w-full text-left">Wars</button>
@@ -64,6 +67,11 @@ const Nav = () => {
           <li className="max-md:hover:bg-[#9dae11] p-2 rounded-md duration-300 w-full block">
             Contact
           </li>
+          {
+            admin?.islogin && <Link href="/admin/dashboard" className="max-md:hover:bg-[#9dae11] p-2 rounded-md duration-300 w-full block">
+            Admin
+          </Link>
+          }
         </ul>
 
         <li onClick={() => setOpen(!open)} className="list-none md:hidden">
