@@ -25,7 +25,7 @@
 - **Frontend**: Next.js 14 (App Router), Tailwind CSS, Lucide Icons  
 - **Backend**: Node.js, Express.js, MongoDB  
 - **Auth**: Context API with token-based admin login  
-- **Deployment**: (Add deployment info if needed)
+- **Deployment**: (render,vercel)
 
 ---
 
