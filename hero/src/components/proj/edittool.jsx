@@ -3,8 +3,8 @@
 import { useEffect, useRef } from "react";
 
 export default function Editor({ data, onChange }) {
-  const editorRef = useRef(null); // to store the EditorJS instance
-  const isEditorInitialized = useRef(false); // flag to prevent double init
+  const editorRef = useRef(null); 
+  const isEditorInitialized = useRef(false);
 
   useEffect(() => {
     if (isEditorInitialized.current) return;

@@ -44,6 +44,7 @@ export default function Home() {
   const fetchdata = (page) => {
     setLloading(true)
     axios.get(`${process.env.NEXT_PUBLIC_API_URL}/getlim?page=${page}&limit=${limit}`).then(({data}) => {
+      console.log(data)
       setData(data.data);
       const {pagination} = data;
       setHasNext(pagination.hasNext);

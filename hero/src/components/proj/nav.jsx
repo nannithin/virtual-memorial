@@ -37,10 +37,10 @@ const Nav = () => {
           } max-md:px-5 max-md:space-y-5`}
         >
           <li className="max-md:hover:bg-[#9dae11] p-2 rounded-md duration-300 w-full block">
-            Home
+            <Link href="/home">Home</Link>
           </li>
           <li className="max-md:hover:bg-[#9dae11] p-2 rounded-md duration-300 w-full block">
-            About
+            <Link href="home">About</Link>
           </li>
           <li className="max-md:hover:bg-[#9dae11] p-2 rounded-md duration-300 w-full block">
             <DropdownMenu>
@@ -65,7 +65,7 @@ const Nav = () => {
             </DropdownMenu>
           </li>
           <li className="max-md:hover:bg-[#9dae11] p-2 rounded-md duration-300 w-full block">
-            Contact
+            <Link href="/contact">Contact</Link>
           </li>
           {
             admin?.islogin && <Link href="/admin/dashboard" className="max-md:hover:bg-[#9dae11] p-2 rounded-md duration-300 w-full block">
